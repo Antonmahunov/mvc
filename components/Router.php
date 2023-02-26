@@ -31,15 +31,14 @@ class Router
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
                 $segments = explode('/', $internalRoute);
+                // live templates
 
                 $controllerName = ucfirst(array_shift($segments)) . 'Controller';
 
                 //And action to process the file
                 $actionName = 'action' . ucfirst(array_shift($segments));
 
-                $parameters = $segments;
-                echo '<pre>';
-                print_r($parameters);
+                $parameters = explode(',', array_shift($segments));
 
                 //Include class Controller file
                 $controllerFile = ROOT . '/controllers/' .
@@ -51,7 +50,7 @@ class Router
 
                 //Create object, call method
                 $controllerObject = new $controllerName;
-                $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+                $result = call_user_func_array([$controllerObject, $actionName], $parameters);
                 if ($result != null) {
                     break;
                 }

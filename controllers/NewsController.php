@@ -10,8 +10,8 @@ class NewsController
 
     public function actionView($category, $id)
     {
-        echo '<br>' . $category;
-        echo '<br>' . $id;
+        echo '<br> category: ' . $category;
+        echo '<br> id: ' . $id;
 
         return true;
     }
